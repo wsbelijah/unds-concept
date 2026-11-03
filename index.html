@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>UNDS — Elevated Street Heritage | Next Drop Saturday Nov 7, 11AM PST</title>
+<meta name="description" content="UNDS. Elevated street heritage, designed and made in Los Angeles. Heavyweight fabrics, small Saturday drops. Next capsule: Saturday, November 7 at 11AM PST.">
+<style>
+@font-face{font-family:"Libre Franklin";src:url("fonts/libre-franklin-var.woff2") format("woff2");font-weight:100 900;font-style:normal;font-display:swap}
+:root{
+  --bg:#E8E1D1; --panel:#DED4BC; --ink:#171410; --accent:#8C3B22;
+  --line:rgba(23,20,16,.28); --line-soft:rgba(23,20,16,.14);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--ink);font-family:"Libre Franklin",Helvetica,Arial,sans-serif;font-size:17px;line-height:1.55;-webkit-font-smoothing:antialiased}
+body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:60;opacity:.05;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)'/%3E%3C/svg%3E")}
+img{display:block;max-width:100%}
+a{color:inherit}
+.label{font-size:11px;font-weight:700;letter-spacing:.22em;text-transform:uppercase}
+.wrap{max-width:1360px;margin:0 auto;padding:0 28px}
+header{position:sticky;top:0;z-index:50;background:var(--bg);border-bottom:1px solid var(--ink)}
+.hbar{display:flex;align-items:center;justify-content:space-between;height:58px}
+.logo{font-weight:900;font-size:30px;letter-spacing:-.02em;text-transform:lowercase;line-height:1;text-decoration:none}
+nav{display:flex;gap:30px}
+nav a{font-size:11px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;text-decoration:none}
+nav a:hover{color:var(--accent)}
+.hmail{font-size:11px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;text-decoration:none;border:1px solid var(--ink);padding:8px 14px}
+.hmail:hover{background:var(--ink);color:var(--bg)}
+.hero{padding:54px 0 0;border-bottom:1px solid var(--ink)}
+.hero h1{font-weight:900;text-transform:lowercase;font-size:clamp(96px,17.5vw,250px);line-height:.82;letter-spacing:-.03em}
+.hero-sub{display:flex;flex-wrap:wrap;gap:10px 34px;align-items:baseline;padding:20px 0 26px;border-top:1px solid var(--ink);margin-top:26px}
+.hero-sub .big{font-size:clamp(19px,2.4vw,27px);font-weight:700;text-transform:uppercase;letter-spacing:.04em}
+.hero-imgs{display:grid;grid-template-columns:1.15fr 1fr 1fr;gap:14px;padding-bottom:14px}
+.hero-imgs figure{overflow:hidden;background:var(--panel)}
+.hero-imgs img{width:100%;height:100%;object-fit:cover;aspect-ratio:4/4.6;transition:transform .8s cubic-bezier(.2,.7,.2,1);cursor:zoom-in}
+.hero-imgs figure:hover img{transform:scale(1.035)}
+.dropbar{background:var(--ink);color:var(--bg)}
+.dropbar-in{display:grid;grid-template-columns:1.2fr auto 1fr;gap:28px;align-items:center;padding:30px 0}
+.dropbar .label{color:var(--panel)}
+.drop-title{font-size:clamp(22px,3vw,34px);font-weight:900;text-transform:uppercase;line-height:1.05;letter-spacing:.01em}
+.drop-title em{font-style:normal;color:#D98E6A}
+.count{display:flex;gap:10px}
+.count div{border:1px solid rgba(232,225,209,.4);min-width:74px;text-align:center;padding:10px 4px 8px}
+.count b{display:block;font-size:30px;font-weight:900;line-height:1;font-variant-numeric:tabular-nums}
+.count span{font-size:9px;font-weight:700;letter-spacing:.24em;text-transform:uppercase;color:var(--panel)}
+.access{justify-self:end;max-width:340px}
+.access p{font-size:13.5px;line-height:1.5;color:var(--panel);margin-bottom:10px}
+.access form{display:flex}
+.access input{flex:1;min-width:0;background:transparent;border:1px solid rgba(232,225,209,.5);color:var(--bg);padding:11px 12px;font:inherit;font-size:14px}
+.access input::placeholder{color:rgba(232,225,209,.55)}
+.access button{background:var(--accent);color:#fff;border:1px solid var(--accent);padding:11px 16px;font:inherit;font-size:11px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;cursor:pointer;white-space:nowrap}
+.access button:hover{background:#74301C}
+section{padding:74px 0}
+.sec-head{display:flex;align-items:baseline;justify-content:space-between;gap:20px;border-bottom:2px solid var(--ink);padding-bottom:14px;margin-bottom:38px}
+.sec-head h2{font-size:clamp(30px,4.4vw,52px);font-weight:900;text-transform:uppercase;line-height:1;letter-spacing:-.01em}
+.sec-head .label{color:var(--accent)}
+.capsule{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.card{border:1px solid var(--ink);background:var(--bg);display:flex;flex-direction:column}
+.card figure{overflow:hidden;background:var(--panel)}
+.card img{width:100%;aspect-ratio:4/3.1;object-fit:cover;transition:transform .8s cubic-bezier(.2,.7,.2,1);cursor:zoom-in}
+.card:hover img{transform:scale(1.03)}
+.card-body{padding:22px 24px 24px;display:flex;flex-direction:column;gap:14px;flex:1}
+.card-top{display:flex;justify-content:space-between;align-items:baseline;gap:14px}
+.card h3{font-size:24px;font-weight:900;text-transform:uppercase;line-height:1.05}
+.price{font-size:20px;font-weight:900;color:var(--accent);white-space:nowrap}
+.card p{font-size:15px;line-height:1.6;max-width:52ch}
+.specs{border-top:1px solid var(--line);margin-top:auto}
+.specs div{display:flex;justify-content:space-between;gap:16px;padding:7px 0;border-bottom:1px solid var(--line-soft);font-size:12.5px}
+.specs div span:first-child{font-weight:700;letter-spacing:.16em;text-transform:uppercase;font-size:10.5px;padding-top:2px}
+.specs div span:last-child{text-align:right}
+.tag{align-self:flex-start;font-size:10px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;border:1px solid var(--accent);color:var(--accent);padding:5px 9px}
+.archive{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.acard{border:1px solid var(--line);background:var(--bg)}
+.acard figure{overflow:hidden;background:var(--panel)}
+.acard img{width:100%;aspect-ratio:1/1.08;object-fit:cover;cursor:zoom-in;transition:transform .8s cubic-bezier(.2,.7,.2,1)}
+.acard:hover img{transform:scale(1.03)}
+.acard-body{padding:16px 18px 18px}
+.acard h3{font-size:16.5px;font-weight:900;text-transform:uppercase;line-height:1.15;margin:8px 0 6px}
+.acard p{font-size:13px;line-height:1.55;color:rgba(23,20,16,.78)}
+.acard .row{display:flex;justify-content:space-between;align-items:baseline}
+.acard .price{font-size:16px}
+.status{font-size:10px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:rgba(23,20,16,.55)}
+.fits{background:var(--panel);border-top:1px solid var(--ink);border-bottom:1px solid var(--ink)}
+.fits-grid{display:grid;grid-template-columns:1.05fr 1fr;gap:44px;align-items:start}
+.fits-imgs{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.fits-imgs img{width:100%;aspect-ratio:1/1.15;object-fit:cover;cursor:zoom-in}
+.fits h2{font-size:clamp(28px,3.6vw,44px);font-weight:900;text-transform:uppercase;line-height:1.02;margin-bottom:16px}
+.fits p{font-size:15.5px;line-height:1.65;max-width:54ch;margin-bottom:14px}
+.steps{border-top:1px solid var(--ink);margin-top:22px}
+.steps div{display:flex;gap:18px;padding:11px 0;border-bottom:1px solid var(--line);font-size:14.5px;align-items:baseline}
+.steps b{font-weight:900;color:var(--accent);font-size:15px;min-width:26px}
+.about-grid{display:grid;grid-template-columns:1.2fr 1fr;gap:44px}
+.about h2{font-size:clamp(30px,4.4vw,52px);font-weight:900;text-transform:uppercase;line-height:1;margin-bottom:20px}
+.about p{font-size:16.5px;line-height:1.7;max-width:58ch;margin-bottom:14px}
+.facts{border:1px solid var(--ink)}
+.facts div{display:flex;justify-content:space-between;gap:16px;padding:13px 18px;border-bottom:1px solid var(--line-soft);font-size:13.5px}
+.facts div:last-child{border-bottom:none}
+.facts span:first-child{font-weight:700;letter-spacing:.16em;text-transform:uppercase;font-size:10.5px;padding-top:2px}
+footer{background:var(--ink);color:var(--bg);padding:56px 0 34px}
+.foot-logo{font-weight:900;text-transform:lowercase;font-size:clamp(70px,11vw,150px);line-height:.85;letter-spacing:-.03em}
+.foot-grid{display:flex;flex-wrap:wrap;gap:14px 44px;justify-content:space-between;border-top:1px solid rgba(232,225,209,.3);margin-top:34px;padding-top:24px;font-size:13px}
+.foot-grid a{text-decoration:none;border-bottom:1px solid rgba(232,225,209,.4)}
+.foot-grid a:hover{color:#D98E6A}
+.reveal{opacity:0;transform:translateY(22px);transition:opacity .7s ease,transform .7s cubic-bezier(.2,.7,.2,1)}
+.reveal.in{opacity:1;transform:none}
+#lightbox{position:fixed;inset:0;background:rgba(15,13,10,.93);display:none;align-items:center;justify-content:center;z-index:100;cursor:zoom-out}
+#lightbox.open{display:flex}
+#lightbox img{max-width:92vw;max-height:90vh;object-fit:contain}
+@media (prefers-reduced-motion: reduce){.reveal{opacity:1;transform:none;transition:none}.hero-imgs img,.card img,.acard img{transition:none}}
+@media (max-width:900px){
+  .dropbar-in{grid-template-columns:1fr;gap:20px}
+  .access{justify-self:start;max-width:100%;width:100%}
+  .capsule{grid-template-columns:1fr}
+  .archive{grid-template-columns:1fr 1fr}
+  .fits-grid,.about-grid{grid-template-columns:1fr}
+  nav{display:none}
+  .hero-imgs{grid-template-columns:1fr 1fr}
+  .hero-imgs figure:last-child{display:none}
+  .dropbar{overflow:hidden}
+  .drop-title{font-size:21px}
+  .count{gap:7px}
+  .count div{min-width:60px;padding:8px 2px 6px}
+  .count b{font-size:23px}
+  .acard h3{font-size:15px}
+  .acard .row{flex-wrap:wrap;gap:2px 8px}
+  section{padding:52px 0}
+}
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap hbar">
+    <a class="logo" href="#">unds</a>
+    <nav>
+      <a href="#capsule">The Capsule</a>
+      <a href="#archive">Archive</a>
+      <a href="#fits">Fits &amp; Giveaway</a>
+      <a href="#about">About</a>
+    </nav>
+    <a class="hmail" href="mailto:Support@undsonline.com">Support</a>
+  </div>
+</header>
+
+<div class="hero">
+  <div class="wrap">
+    <h1>unds</h1>
+    <div class="hero-sub">
+      <span class="big">Elevated Street Heritage</span>
+      <span class="label">Designed &amp; Made in Los Angeles</span>
+      <span class="label">Heavyweight Fabrics — Small Saturday Drops</span>
+    </div>
+    <div class="hero-imgs">
+      <figure><img src="img/p02.jpg" alt="Single V Crewneck in Dirty Cream, worn against a brick wall" data-full="img/p02.jpg"></figure>
+      <figure><img src="img/p01.jpg" alt="Form Tee and Utility Shorts from the Fall/Winter capsule" data-full="img/p01.jpg"></figure>
+      <figure><img src="img/p23.jpg" alt="UNDS work jacket worn on court" data-full="img/p23.jpg"></figure>
+    </div>
+  </div>
+  <div class="dropbar">
+    <div class="wrap dropbar-in">
+      <div>
+        <div class="label">Next Drop — Fall/Winter Capsule</div>
+        <div class="drop-title">Saturday, Nov 7<br><em>11:00 AM PST</em></div>
+      </div>
+      <div class="count" id="count" aria-label="Countdown to the drop">
+        <div><b id="cd-d">–</b><span>Days</span></div>
+        <div><b id="cd-h">–</b><span>Hours</span></div>
+        <div><b id="cd-m">–</b><span>Min</span></div>
+        <div><b id="cd-s">–</b><span>Sec</span></div>
+      </div>
+      <div class="access">
+        <p>Early access goes out before the drop. Leave your email — submitting opens your mail app to confirm. No account, no spam.</p>
+        <form id="access-form">
+          <input type="email" id="access-email" placeholder="your@email.com" required aria-label="Email for early access">
+          <button type="submit">Early Access</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<section id="capsule">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <h2>The Capsule</h2>
+      <span class="label">4 Pieces — Sat Nov 7 — 11AM PST</span>
+    </div>
+    <div class="capsule">
+      <article class="card reveal">
+        <figure><img src="img/shorts.jpg" alt="Utility Shorts in washed grey Japanese cotton twill" data-full="img/shorts.jpg"></figure>
+        <div class="card-body">
+          <div class="card-top"><h3>Utility Shorts</h3><span class="price">$265</span></div>
+          <p>Heavyweight Japanese cotton twill, treated through a specialized process for an authentic vintage character — no potassium. Every pair fades differently. No two are exactly alike.</p>
+          <div class="specs">
+            <div><span>Fabric</span><span>Heavyweight Japanese cotton twill</span></div>
+            <div><span>Cut</span><span>Low waist, 3/4 length, double-layer knee panels</span></div>
+            <div><span>Sizes</span><span>30 – 40</span></div>
+            <div><span>Stock</span><span>Premade, ready to ship</span></div>
+          </div>
+        </div>
+      </article>
+      <article class="card reveal">
+        <figure><img src="img/p02.jpg" alt="Single V Crewneck in Dirty Cream" data-full="img/p02.jpg"></figure>
+        <div class="card-body">
+          <div class="card-top"><h3>Single V Crewneck</h3><span class="price">$200</span></div>
+          <p>Inspired by 1940s single-V crewnecks — true to the feel and finishing of authentic vintage pieces, with a refined modern fit. 100% brushed French terry, milled and made in the USA.</p>
+          <div class="specs">
+            <div><span>Fabric</span><span>Brushed French terry, 100% cotton</span></div>
+            <div><span>Color</span><span>Dirty Cream</span></div>
+            <div><span>Origin</span><span>Milled &amp; manufactured in the USA</span></div>
+            <div><span>Stock</span><span>Premade, ready to ship</span></div>
+          </div>
+        </div>
+      </article>
+      <article class="card reveal">
+        <figure><img src="img/tee.jpg" alt="Form Tee in black, worn against a brick wall" data-full="img/tee.jpg"></figure>
+        <div class="card-body">
+          <div class="card-top"><h3>Form Tee</h3><span class="price">$60</span></div>
+          <p>Our newest heavyweight premium black tee, built to bridge formal and everyday. A more structured, refined silhouette than our previous tees — dresses up, wears casual, never feels overly formal.</p>
+          <div class="specs">
+            <div><span>Fabric</span><span>Heavyweight premium cotton</span></div>
+            <div><span>Cut</span><span>Structured, refined fit</span></div>
+            <div><span>Sizes</span><span>S – XL</span></div>
+            <div><span>Stock</span><span>Premade, ready to ship</span></div>
+          </div>
+        </div>
+      </article>
+      <article class="card reveal">
+        <figure><img src="img/p04.jpg" alt="The Single V Crewneck in Dirty Cream, which the fourth piece pairs with" data-full="img/p04.jpg"></figure>
+        <div class="card-body">
+          <span class="tag">Full Reveal This Week</span>
+          <div class="card-top"><h3>The Fourth Piece</h3></div>
+          <p>Matching bottoms for the Single V Crewneck complete the capsule. Full details and pricing post to <a href="https://www.instagram.com/undsonline" target="_blank" rel="noopener">@undsonline</a> this week — early access hears first.</p>
+          <div class="specs">
+            <div><span>Pairs With</span><span>Single V Crewneck — Dirty Cream</span></div>
+            <div><span>Drop</span><span>Saturday, Nov 7 — 11AM PST</span></div>
+            <div><span>Stock</span><span>Premade, ready to ship</span></div>
+          </div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section id="archive" style="padding-top:0">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <h2>Archive</h2>
+      <span class="label">Past Drops — Gone When They're Gone</span>
+    </div>
+    <div class="archive">
+      <article class="acard reveal">
+        <figure><img src="img/bb-denim.jpg" alt="Black Badge 21 oz denim, washed black" data-full="img/bb-denim.jpg"></figure>
+        <div class="acard-body">
+          <div class="row"><span class="status">Black Badge</span><span class="price">$500 – $600</span></div>
+          <h3>Black Badge Denim — 21 oz Selvedge</h3>
+          <p>The highest level of UNDS denim. Heavyweight 21 oz Japanese selvedge in the signature relaxed cut — Indigo with gold trims at $500, and the washed edition at $600, washed to read like a true one-of-one vintage pair. The washed edition previewed at the NYFW pop-up and sold out there. Sizes 30–40.</p>
+        </div>
+      </article>
+      <article class="acard reveal">
+        <figure><img src="img/p25.jpg" alt="Light Wash Double Knee Capris denim" data-full="img/p25.jpg"></figure>
+        <div class="acard-body">
+          <div class="row"><span class="status">Denim</span></div>
+          <h3>Double Knee Capris — Light Wash</h3>
+          <p>Our most sought-after silhouette, returned in a new form. Anybody can cut up a pair of vintage carpenters — these were built properly, from the ground up. Vintage-inspired wash, modern construction.</p>
+        </div>
+      </article>
+      <article class="acard reveal">
+        <figure><img src="img/p06.jpg" alt="The Lenley leather henley in charcoal" data-full="img/p06.jpg"></figure>
+        <div class="acard-body">
+          <div class="row"><span class="status">Henley</span><span class="price">$250</span></div>
+          <h3>The Lenley</h3>
+          <p>The traditional henley, rebuilt with leather. Premium waffle knit milled in Los Angeles, finished with imported Italian lambskin for the snap enclosure. Black on Black and White on Black.</p>
+        </div>
+      </article>
+      <article class="acard reveal">
+        <figure><img src="img/p13.jpg" alt="V3 Bagged Tees in washed colorways" data-full="img/p13.jpg"></figure>
+        <div class="acard-body">
+          <div class="row"><span class="status">Tees</span><span class="price">$135</span></div>
+          <h3>V3 Bagged Tee</h3>
+          <p>Our V3 fit — closer to the body, longer vintage silhouette, individually faded and distressed. Charcoal, Wine Red, Mocha Brown, Forest Green. Tier pricing ran to all four for $400.</p>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section id="fits" class="fits">
+  <div class="wrap fits-grid">
+    <div class="fits-imgs reveal">
+      <img src="img/p10.jpg" alt="Chopped longsleeves in washed colorways" data-full="img/p10.jpg">
+      <img src="img/p23.jpg" alt="UNDS worn on court" data-full="img/p23.jpg">
+      <img src="img/p25.jpg" alt="Light wash double knee denim" data-full="img/p25.jpg">
+      <img src="img/p01.jpg" alt="Form Tee and Utility Shorts fit" data-full="img/p01.jpg">
+    </div>
+    <div class="reveal">
+      <span class="label" style="color:var(--accent)">Community</span>
+      <h2>Fits &amp; The Drop Giveaway</h2>
+      <p>UNDS is worn, not just sold. Fit Pic Friday runs every month — post your fit, the community votes, and the winner gets store credit toward the next drop. Fits of the Week keeps the best ones in rotation.</p>
+      <p>For the Nov 7 capsule, one winner takes a pair of Utility Shorts and one takes a Form Tee. One of each item in the capsule is being given away.</p>
+      <div class="steps">
+        <div><b>01</b><span>Like the drop post on <a href="https://www.instagram.com/undsonline" target="_blank" rel="noopener">@undsonline</a></span></div>
+        <div><b>02</b><span>Comment your size and the item you want</span></div>
+        <div><b>03</b><span>Tag 2 friends</span></div>
+        <div><b>04</b><span>Repost the drop post to your story</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="about" class="about">
+  <div class="wrap about-grid">
+    <div class="reveal">
+      <span class="label" style="color:var(--accent)">About the Brand</span>
+      <h2>Built Like the Vintage It Studies</h2>
+      <p>UNDS is elevated street heritage — designed and made in Los Angeles, and built the slow way. Heavyweight Japanese fabrics, American-milled terry, Italian leather hardware. Pieces start from real vintage references — a 1940s crewneck, a broken-in pair of selvedge — and get rebuilt with modern construction until they hold their structure and age like the originals.</p>
+      <p>Everything is premade and limited. Drops land Saturdays at 11AM PST, and when a piece is gone, it's gone — the archive above is the proof.</p>
+    </div>
+    <div class="facts reveal">
+      <div><span>Based</span><span>Los Angeles, California</span></div>
+      <div><span>Drops</span><span>Saturdays, 11AM PST</span></div>
+      <div><span>Next Drop</span><span>Saturday, Nov 7 — FW Capsule</span></div>
+      <div><span>Fabrics</span><span>Japanese selvedge &amp; twill, USA French terry</span></div>
+      <div><span>Stock</span><span>Premade, limited quantities</span></div>
+      <div><span>Support</span><span>Support@undsonline.com</span></div>
+      <div><span>Instagram</span><span>@undsonline — 23.1K</span></div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-logo">unds</div>
+    <div class="foot-grid">
+      <span>© 2026 UNDS — Designed &amp; Made in LA</span>
+      <a href="https://www.instagram.com/undsonline" target="_blank" rel="noopener">Instagram — @undsonline</a>
+      <a href="mailto:Support@undsonline.com">Support@undsonline.com</a>
+      <a href="https://www.undsonline.com" target="_blank" rel="noopener">undsonline.com</a>
+    </div>
+  </div>
+</footer>
+
+<div id="lightbox" role="dialog" aria-label="Photo viewer"><img id="lightbox-img" src="" alt="UNDS photo, enlarged"></div>
+<script>
+(function(){
+  // Countdown to Saturday, Nov 7 2026, 11:00 AM PST
+  var target = new Date("2026-11-07T11:00:00-08:00").getTime();
+  var dEl=document.getElementById("cd-d"),hEl=document.getElementById("cd-h"),
+      mEl=document.getElementById("cd-m"),sEl=document.getElementById("cd-s");
+  function pad(n){return (n<10?"0":"")+n}
+  function tick(){
+    var diff = target - Date.now();
+    if(diff<=0){ dEl.textContent="0";hEl.textContent="00";mEl.textContent="00";sEl.textContent="00";
+      var t=document.querySelector(".drop-title"); if(t) t.innerHTML="The Drop Is <em>Live</em>"; return; }
+    var d=Math.floor(diff/864e5), h=Math.floor(diff/36e5)%24, m=Math.floor(diff/6e4)%60, s=Math.floor(diff/1e3)%60;
+    dEl.textContent=d; hEl.textContent=pad(h); mEl.textContent=pad(m); sEl.textContent=pad(s);
+    setTimeout(tick,1000);
+  }
+  tick();
+  // Early access: no backend — the form composes an email to the brand's support inbox.
+  document.getElementById("access-form").addEventListener("submit",function(e){
+    e.preventDefault();
+    var em=document.getElementById("access-email").value.trim();
+    var body=encodeURIComponent("Please add me to early access for the Saturday, Nov 7 drop.\n\nMy email: "+em);
+    window.location.href="mailto:Support@undsonline.com?subject="+encodeURIComponent("Early Access — Nov 7 Drop")+"&body="+body;
+  });
+  // Scroll reveal (opacity/translate only)
+  var io=new IntersectionObserver(function(es){es.forEach(function(en){if(en.isIntersecting){en.target.classList.add("in");io.unobserve(en.target)}})},{threshold:.12});
+  document.querySelectorAll(".reveal").forEach(function(el){io.observe(el)});
+  // Lightbox
+  var lb=document.getElementById("lightbox"), lbImg=document.getElementById("lightbox-img");
+  document.querySelectorAll("img[data-full]").forEach(function(img){
+    img.addEventListener("click",function(){ lbImg.src=img.getAttribute("data-full"); lb.classList.add("open"); });
+  });
+  lb.addEventListener("click",function(){ lb.classList.remove("open"); lbImg.src=""; });
+  document.addEventListener("keydown",function(e){ if(e.key==="Escape"){ lb.classList.remove("open"); lbImg.src=""; }});
+})();
+</script>
+</body>
+</html>
