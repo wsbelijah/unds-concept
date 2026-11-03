@@ -13,84 +13,136 @@
 }
 *{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth}
-body{background:var(--bg);color:var(--ink);font-family:"Libre Franklin",Helvetica,Arial,sans-serif;font-size:17px;line-height:1.55;-webkit-font-smoothing:antialiased}
-body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:60;opacity:.05;
+body{background:var(--bg);color:var(--ink);font-family:"Libre Franklin",Helvetica,Arial,sans-serif;font-size:17px;line-height:1.55;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:200;opacity:.05;
   background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)'/%3E%3C/svg%3E")}
 img{display:block;max-width:100%}
 a{color:inherit}
 .label{font-size:11px;font-weight:700;letter-spacing:.22em;text-transform:uppercase}
 .wrap{max-width:1360px;margin:0 auto;padding:0 28px}
-header{position:sticky;top:0;z-index:50;background:var(--bg);border-bottom:1px solid var(--ink)}
+button{font:inherit}
+/* custom cursor */
+#cursor-dot,#cursor-ring{position:fixed;top:0;left:0;pointer-events:none;z-index:300;border-radius:50%;display:none}
+#cursor-dot{width:7px;height:7px;background:var(--accent);transform:translate(-50%,-50%)}
+#cursor-ring{width:34px;height:34px;border:1.5px solid rgba(140,59,34,.75);transform:translate(-50%,-50%);transition:width .25s,height .25s,border-color .25s,background .25s}
+#cursor-ring.grow{width:58px;height:58px;background:rgba(140,59,34,.08)}
+@media (pointer:fine){#cursor-dot,#cursor-ring{display:block}}
+/* header */
+header{position:fixed;top:0;left:0;right:0;z-index:90;background:rgba(232,225,209,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--ink)}
 .hbar{display:flex;align-items:center;justify-content:space-between;height:58px}
 .logo{font-weight:900;font-size:30px;letter-spacing:-.02em;text-transform:lowercase;line-height:1;text-decoration:none}
 nav{display:flex;gap:30px}
 nav a{font-size:11px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;text-decoration:none}
 nav a:hover{color:var(--accent)}
-.hmail{font-size:11px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;text-decoration:none;border:1px solid var(--ink);padding:8px 14px}
+.hbtns{display:flex;gap:10px;align-items:center}
+.hmail{font-size:11px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;text-decoration:none;border:1px solid var(--ink);padding:8px 14px;background:transparent;cursor:pointer}
 .hmail:hover{background:var(--ink);color:var(--bg)}
-.hero{padding:54px 0 0;border-bottom:1px solid var(--ink)}
-.hero h1{font-weight:900;text-transform:lowercase;font-size:clamp(96px,17.5vw,250px);line-height:.82;letter-spacing:-.03em}
-.hero-sub{display:flex;flex-wrap:wrap;gap:10px 34px;align-items:baseline;padding:20px 0 26px;border-top:1px solid var(--ink);margin-top:26px}
-.hero-sub .big{font-size:clamp(19px,2.4vw,27px);font-weight:700;text-transform:uppercase;letter-spacing:.04em}
-.hero-imgs{display:grid;grid-template-columns:1.15fr 1fr 1fr;gap:14px;padding-bottom:14px}
-.hero-imgs figure{overflow:hidden;background:var(--panel)}
-.hero-imgs img{width:100%;height:100%;object-fit:cover;aspect-ratio:4/4.6;transition:transform .8s cubic-bezier(.2,.7,.2,1);cursor:zoom-in}
-.hero-imgs figure:hover img{transform:scale(1.035)}
-.dropbar{background:var(--ink);color:var(--bg)}
-.dropbar-in{display:grid;grid-template-columns:1.2fr auto 1fr;gap:28px;align-items:center;padding:30px 0}
+#droplist-btn{background:var(--ink);color:var(--bg)}
+#droplist-btn:hover{background:var(--accent);border-color:var(--accent)}
+#droplist-btn b{color:#D98E6A}
+/* scroll hero */
+.hero-pin{height:340vh;position:relative}
+.hero-sticky{position:sticky;top:0;height:100vh;height:100svh;overflow:hidden;background:var(--ink)}
+.hero-layer{position:absolute;inset:0;opacity:0;will-change:opacity,transform}
+.hero-layer img{width:100%;height:100%;object-fit:cover}
+.hero-layer::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(15,13,10,.28),rgba(15,13,10,0) 34%,rgba(15,13,10,0) 62%,rgba(15,13,10,.42))}
+.hero-shade{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;z-index:5;padding:0 20px}
+.hero-word{font-weight:900;text-transform:lowercase;color:var(--bg);font-size:clamp(110px,19vw,290px);line-height:.8;letter-spacing:-.03em;will-change:transform,opacity;text-shadow:0 2px 30px rgba(0,0,0,.25)}
+.hero-tag{color:var(--bg);margin-top:18px;font-size:clamp(12px,1.4vw,15px);font-weight:700;letter-spacing:.3em;text-transform:uppercase}
+.hero-beat{position:absolute;left:0;right:0;bottom:15vh;text-align:center;z-index:6;color:var(--bg);opacity:0;padding:0 20px;will-change:opacity,transform}
+.hero-beat .b1{display:block;font-size:clamp(26px,4.6vw,58px);font-weight:900;text-transform:uppercase;line-height:1.02}
+.hero-beat .b2{display:block;margin-top:8px;font-size:12px;font-weight:700;letter-spacing:.26em;text-transform:uppercase;color:#E7C9B4}
+.hero-progress{position:absolute;left:0;bottom:0;height:4px;background:var(--accent);width:0;z-index:8}
+.hero-hint{position:absolute;bottom:26px;left:50%;transform:translateX(-50%);z-index:7;color:rgba(232,225,209,.85);font-size:10px;font-weight:700;letter-spacing:.3em;text-transform:uppercase;text-align:center}
+.hero-hint::after{content:"";display:block;width:1px;height:34px;background:rgba(232,225,209,.6);margin:8px auto 0}
+/* drop bar */
+.dropbar{background:var(--ink);color:var(--bg);border-bottom:1px solid var(--ink)}
+.dropbar-in{display:grid;grid-template-columns:1.1fr auto 1fr;gap:28px;align-items:center;padding:26px 0}
 .dropbar .label{color:var(--panel)}
-.drop-title{font-size:clamp(22px,3vw,34px);font-weight:900;text-transform:uppercase;line-height:1.05;letter-spacing:.01em}
+.drop-title{font-size:clamp(21px,2.8vw,32px);font-weight:900;text-transform:uppercase;line-height:1.05}
 .drop-title em{font-style:normal;color:#D98E6A}
-.count{display:flex;gap:10px}
-.count div{border:1px solid rgba(232,225,209,.4);min-width:74px;text-align:center;padding:10px 4px 8px}
-.count b{display:block;font-size:30px;font-weight:900;line-height:1;font-variant-numeric:tabular-nums}
+.count{display:flex;gap:9px}
+.count div{border:1px solid rgba(232,225,209,.4);min-width:70px;text-align:center;padding:9px 4px 7px}
+.count b{display:block;font-size:28px;font-weight:900;line-height:1;font-variant-numeric:tabular-nums}
 .count span{font-size:9px;font-weight:700;letter-spacing:.24em;text-transform:uppercase;color:var(--panel)}
-.access{justify-self:end;max-width:340px}
-.access p{font-size:13.5px;line-height:1.5;color:var(--panel);margin-bottom:10px}
+.access{justify-self:end;max-width:340px;width:100%}
+.access p{font-size:13px;line-height:1.5;color:var(--panel);margin-bottom:10px}
 .access form{display:flex}
 .access input{flex:1;min-width:0;background:transparent;border:1px solid rgba(232,225,209,.5);color:var(--bg);padding:11px 12px;font:inherit;font-size:14px}
 .access input::placeholder{color:rgba(232,225,209,.55)}
-.access button{background:var(--accent);color:#fff;border:1px solid var(--accent);padding:11px 16px;font:inherit;font-size:11px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;cursor:pointer;white-space:nowrap}
+.access button{background:var(--accent);color:#fff;border:1px solid var(--accent);padding:11px 16px;font-size:11px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;cursor:pointer;white-space:nowrap}
 .access button:hover{background:#74301C}
+/* sections */
 section{padding:74px 0}
-.sec-head{display:flex;align-items:baseline;justify-content:space-between;gap:20px;border-bottom:2px solid var(--ink);padding-bottom:14px;margin-bottom:38px}
+.sec-head{display:flex;align-items:baseline;justify-content:space-between;gap:20px;border-bottom:2px solid var(--ink);padding-bottom:14px;margin-bottom:36px}
 .sec-head h2{font-size:clamp(30px,4.4vw,52px);font-weight:900;text-transform:uppercase;line-height:1;letter-spacing:-.01em}
 .sec-head .label{color:var(--accent)}
-.capsule{display:grid;grid-template-columns:1fr 1fr;gap:14px}
-.card{border:1px solid var(--ink);background:var(--bg);display:flex;flex-direction:column}
-.card figure{overflow:hidden;background:var(--panel)}
-.card img{width:100%;aspect-ratio:4/3.1;object-fit:cover;transition:transform .8s cubic-bezier(.2,.7,.2,1);cursor:zoom-in}
-.card:hover img{transform:scale(1.03)}
-.card-body{padding:22px 24px 24px;display:flex;flex-direction:column;gap:14px;flex:1}
-.card-top{display:flex;justify-content:space-between;align-items:baseline;gap:14px}
-.card h3{font-size:24px;font-weight:900;text-transform:uppercase;line-height:1.05}
-.price{font-size:20px;font-weight:900;color:var(--accent);white-space:nowrap}
-.card p{font-size:15px;line-height:1.6;max-width:52ch}
-.specs{border-top:1px solid var(--line);margin-top:auto}
+.hint-note{font-size:12px;color:rgba(23,20,16,.6);letter-spacing:.06em}
+/* capsule stage */
+.stage{display:grid;grid-template-columns:1.05fr 1fr;gap:0;border:1px solid var(--ink)}
+.stage-media{position:relative;overflow:hidden;background:var(--panel);min-height:420px}
+.stage-media img{width:100%;height:100%;object-fit:cover;position:absolute;inset:0;transition:opacity .45s ease}
+#stage-img-b{opacity:0}
+#loupe{position:absolute;width:190px;height:190px;border-radius:50%;border:2px solid var(--bg);box-shadow:0 10px 34px rgba(0,0,0,.35);pointer-events:none;display:none;background-repeat:no-repeat;z-index:4}
+.stage-zoom-tag{position:absolute;left:14px;bottom:14px;z-index:3;background:rgba(23,20,16,.82);color:var(--bg);font-size:10px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;padding:6px 10px}
+.stage-side{padding:28px 30px 30px;display:flex;flex-direction:column;gap:16px}
+.tabs{display:flex;flex-wrap:wrap;gap:8px}
+.tab{border:1px solid var(--ink);background:transparent;padding:9px 13px;font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;cursor:pointer}
+.tab:hover{border-color:var(--accent);color:var(--accent)}
+.tab.on{background:var(--ink);color:var(--bg)}
+.stage-side h3{font-size:clamp(26px,3vw,38px);font-weight:900;text-transform:uppercase;line-height:1.02}
+.stage-price{font-size:24px;font-weight:900;color:var(--accent)}
+.stage-side p{font-size:15.5px;line-height:1.6;max-width:54ch}
+.specs{border-top:1px solid var(--line)}
 .specs div{display:flex;justify-content:space-between;gap:16px;padding:7px 0;border-bottom:1px solid var(--line-soft);font-size:12.5px}
 .specs div span:first-child{font-weight:700;letter-spacing:.16em;text-transform:uppercase;font-size:10.5px;padding-top:2px}
 .specs div span:last-child{text-align:right}
-.tag{align-self:flex-start;font-size:10px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;border:1px solid var(--accent);color:var(--accent);padding:5px 9px}
-.archive{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
-.acard{border:1px solid var(--line);background:var(--bg)}
+.size-row{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.size-chip{border:1px solid var(--line);background:transparent;min-width:44px;padding:9px 10px;font-size:13px;font-weight:700;cursor:pointer}
+.size-chip:hover{border-color:var(--ink)}
+.size-chip.on{background:var(--accent);border-color:var(--accent);color:#fff}
+.size-note{font-size:12.5px;color:rgba(23,20,16,.65)}
+.add-btn{margin-top:auto;background:var(--ink);color:var(--bg);border:1px solid var(--ink);padding:16px;font-size:12px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;cursor:pointer}
+.add-btn:hover{background:var(--accent);border-color:var(--accent)}
+.add-btn:disabled{opacity:.45;cursor:not-allowed}
+.add-btn.added{background:var(--accent);border-color:var(--accent)}
+.stage-count{font-size:11px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:rgba(23,20,16,.55)}
+/* archive rail */
+.rail-wrap{position:relative}
+.rail{display:flex;gap:14px;overflow-x:auto;padding-bottom:14px;scroll-snap-type:x mandatory;cursor:grab;scrollbar-width:none}
+.rail::-webkit-scrollbar{display:none}
+.rail.dragging{cursor:grabbing;scroll-snap-type:none}
+.acard{border:1px solid var(--line);background:var(--bg);flex:0 0 min(330px,82vw);scroll-snap-align:start;user-select:none}
 .acard figure{overflow:hidden;background:var(--panel)}
-.acard img{width:100%;aspect-ratio:1/1.08;object-fit:cover;cursor:zoom-in;transition:transform .8s cubic-bezier(.2,.7,.2,1)}
-.acard:hover img{transform:scale(1.03)}
+.acard img{width:100%;aspect-ratio:1/1.05;object-fit:cover;pointer-events:none}
 .acard-body{padding:16px 18px 18px}
 .acard h3{font-size:16.5px;font-weight:900;text-transform:uppercase;line-height:1.15;margin:8px 0 6px}
 .acard p{font-size:13px;line-height:1.55;color:rgba(23,20,16,.78)}
-.acard .row{display:flex;justify-content:space-between;align-items:baseline}
-.acard .price{font-size:16px}
+.acard .row{display:flex;justify-content:space-between;align-items:baseline;gap:8px}
+.acard .price{font-size:16px;font-weight:900;color:var(--accent);white-space:nowrap}
 .status{font-size:10px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:rgba(23,20,16,.55)}
+.rail-nav{display:flex;gap:8px}
+.rail-nav button{width:44px;height:44px;border:1px solid var(--ink);background:transparent;font-size:18px;cursor:pointer;line-height:1}
+.rail-nav button:hover{background:var(--ink);color:var(--bg)}
+/* fits explorer */
 .fits{background:var(--panel);border-top:1px solid var(--ink);border-bottom:1px solid var(--ink)}
 .fits-grid{display:grid;grid-template-columns:1.05fr 1fr;gap:44px;align-items:start}
-.fits-imgs{display:grid;grid-template-columns:1fr 1fr;gap:14px}
-.fits-imgs img{width:100%;aspect-ratio:1/1.15;object-fit:cover;cursor:zoom-in}
+.fit-picker{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.fit-thumb{border:2px solid transparent;padding:0;background:none;cursor:pointer;overflow:hidden;position:relative}
+.fit-thumb img{width:100%;aspect-ratio:1/1.12;object-fit:cover;pointer-events:none}
+.fit-thumb.on{border-color:var(--accent)}
+.fit-thumb span{position:absolute;left:0;right:0;bottom:0;background:rgba(23,20,16,.82);color:var(--bg);font-size:10px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;padding:7px 8px;text-align:left}
 .fits h2{font-size:clamp(28px,3.6vw,44px);font-weight:900;text-transform:uppercase;line-height:1.02;margin-bottom:16px}
 .fits p{font-size:15.5px;line-height:1.65;max-width:54ch;margin-bottom:14px}
+#fit-detail{border-top:2px solid var(--ink);padding-top:16px;margin-top:6px}
+#fit-detail h3{font-size:19px;font-weight:900;text-transform:uppercase;margin-bottom:8px}
+#fit-detail ul{list-style:none}
+#fit-detail li{display:flex;justify-content:space-between;gap:14px;padding:7px 0;border-bottom:1px solid var(--line-soft);font-size:13.5px}
+#fit-detail li span:first-child{font-weight:700;letter-spacing:.12em;text-transform:uppercase;font-size:11px;padding-top:2px}
 .steps{border-top:1px solid var(--ink);margin-top:22px}
 .steps div{display:flex;gap:18px;padding:11px 0;border-bottom:1px solid var(--line);font-size:14.5px;align-items:baseline}
 .steps b{font-weight:900;color:var(--accent);font-size:15px;min-width:26px}
+/* about */
 .about-grid{display:grid;grid-template-columns:1.2fr 1fr;gap:44px}
 .about h2{font-size:clamp(30px,4.4vw,52px);font-weight:900;text-transform:uppercase;line-height:1;margin-bottom:20px}
 .about p{font-size:16.5px;line-height:1.7;max-width:58ch;margin-bottom:14px}
@@ -98,38 +150,64 @@ section{padding:74px 0}
 .facts div{display:flex;justify-content:space-between;gap:16px;padding:13px 18px;border-bottom:1px solid var(--line-soft);font-size:13.5px}
 .facts div:last-child{border-bottom:none}
 .facts span:first-child{font-weight:700;letter-spacing:.16em;text-transform:uppercase;font-size:10.5px;padding-top:2px}
+/* footer */
 footer{background:var(--ink);color:var(--bg);padding:56px 0 34px}
 .foot-logo{font-weight:900;text-transform:lowercase;font-size:clamp(70px,11vw,150px);line-height:.85;letter-spacing:-.03em}
 .foot-grid{display:flex;flex-wrap:wrap;gap:14px 44px;justify-content:space-between;border-top:1px solid rgba(232,225,209,.3);margin-top:34px;padding-top:24px;font-size:13px}
 .foot-grid a{text-decoration:none;border-bottom:1px solid rgba(232,225,209,.4)}
 .foot-grid a:hover{color:#D98E6A}
-.reveal{opacity:0;transform:translateY(22px);transition:opacity .7s ease,transform .7s cubic-bezier(.2,.7,.2,1)}
-.reveal.in{opacity:1;transform:none}
-#lightbox{position:fixed;inset:0;background:rgba(15,13,10,.93);display:none;align-items:center;justify-content:center;z-index:100;cursor:zoom-out}
+/* drawer */
+#drawer{position:fixed;top:0;right:0;bottom:0;width:min(400px,92vw);background:var(--bg);border-left:2px solid var(--ink);z-index:120;transform:translateX(105%);transition:transform .45s cubic-bezier(.2,.8,.2,1);display:flex;flex-direction:column}
+#drawer.open{transform:none}
+#drawer header{position:static;background:var(--bg);border-bottom:1px solid var(--ink);padding:18px 20px;display:flex;justify-content:space-between;align-items:center}
+#drawer h3{font-size:17px;font-weight:900;text-transform:uppercase}
+#drawer-close{background:none;border:1px solid var(--ink);width:36px;height:36px;cursor:pointer;font-size:15px}
+#drawer-items{flex:1;overflow-y:auto;padding:16px 20px;display:flex;flex-direction:column;gap:14px}
+.ditem{display:flex;gap:12px;border:1px solid var(--line);padding:10px}
+.ditem img{width:64px;height:76px;object-fit:cover}
+.ditem .dn{font-weight:900;text-transform:uppercase;font-size:13.5px;line-height:1.25}
+.ditem .ds{font-size:12px;color:rgba(23,20,16,.65)}
+.ditem .dp{font-weight:900;color:var(--accent);font-size:14px}
+.ditem button{margin-left:auto;align-self:flex-start;background:none;border:none;color:var(--accent);font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;cursor:pointer}
+#drawer-empty{font-size:14.5px;line-height:1.6;color:rgba(23,20,16,.7)}
+#drawer-foot{border-top:1px solid var(--ink);padding:18px 20px}
+#drawer-total{display:flex;justify-content:space-between;font-weight:900;font-size:17px;text-transform:uppercase;margin-bottom:12px}
+#checkout-btn{display:block;text-align:center;background:var(--accent);color:#fff;text-decoration:none;padding:15px;font-size:12px;font-weight:700;letter-spacing:.2em;text-transform:uppercase}
+#checkout-btn:hover{background:#74301C}
+#scrim{position:fixed;inset:0;background:rgba(15,13,10,.5);z-index:110;opacity:0;pointer-events:none;transition:opacity .35s}
+#scrim.on{opacity:1;pointer-events:auto}
+/* lightbox */
+#lightbox{position:fixed;inset:0;background:rgba(15,13,10,.93);display:none;align-items:center;justify-content:center;z-index:150;cursor:zoom-out}
 #lightbox.open{display:flex}
 #lightbox img{max-width:92vw;max-height:90vh;object-fit:contain}
-@media (prefers-reduced-motion: reduce){.reveal{opacity:1;transform:none;transition:none}.hero-imgs img,.card img,.acard img{transition:none}}
+.reveal{opacity:0;transform:translateY(22px);transition:opacity .7s ease,transform .7s cubic-bezier(.2,.7,.2,1)}
+.reveal.in{opacity:1;transform:none}
+@media (prefers-reduced-motion: reduce){
+  .reveal{opacity:1;transform:none;transition:none}
+  .hero-pin{height:auto}
+  .hero-sticky{position:static;height:88vh}
+  #drawer{transition:none}
+}
 @media (max-width:900px){
   .dropbar-in{grid-template-columns:1fr;gap:20px}
-  .access{justify-self:start;max-width:100%;width:100%}
-  .capsule{grid-template-columns:1fr}
-  .archive{grid-template-columns:1fr 1fr}
+  .access{justify-self:start}
+  .stage{grid-template-columns:1fr}
+  .stage-media{min-height:340px}
   .fits-grid,.about-grid{grid-template-columns:1fr}
   nav{display:none}
-  .hero-imgs{grid-template-columns:1fr 1fr}
-  .hero-imgs figure:last-child{display:none}
-  .dropbar{overflow:hidden}
+  .count div{min-width:62px}
+  .count b{font-size:24px}
   .drop-title{font-size:21px}
-  .count{gap:7px}
-  .count div{min-width:60px;padding:8px 2px 6px}
-  .count b{font-size:23px}
-  .acard h3{font-size:15px}
-  .acard .row{flex-wrap:wrap;gap:2px 8px}
   section{padding:52px 0}
+  #loupe{display:none !important}
+  .stage-zoom-tag{display:none}
 }
 </style>
 </head>
 <body>
+<div id="cursor-dot"></div>
+<div id="cursor-ring"></div>
+
 <header>
   <div class="wrap hbar">
     <a class="logo" href="#">unds</a>
@@ -139,43 +217,55 @@ footer{background:var(--ink);color:var(--bg);padding:56px 0 34px}
       <a href="#fits">Fits &amp; Giveaway</a>
       <a href="#about">About</a>
     </nav>
-    <a class="hmail" href="mailto:Support@undsonline.com">Support</a>
+    <div class="hbtns">
+      <a class="hmail" href="mailto:Support@undsonline.com">Support</a>
+      <button class="hmail" id="droplist-btn" type="button">Drop List · <b id="droplist-count">0</b></button>
+    </div>
   </div>
 </header>
 
-<div class="hero">
-  <div class="wrap">
-    <h1>unds</h1>
-    <div class="hero-sub">
-      <span class="big">Elevated Street Heritage</span>
-      <span class="label">Designed &amp; Made in Los Angeles</span>
-      <span class="label">Heavyweight Fabrics — Small Saturday Drops</span>
+<div class="hero-pin" id="hero-pin">
+  <div class="hero-sticky">
+    <div class="hero-layer" data-layer="0"><img src="img/p02.jpg" alt="Single V Crewneck in Dirty Cream against a brick wall"></div>
+    <div class="hero-layer" data-layer="1"><img src="img/p01.jpg" alt="Form Tee and Utility Shorts from the Fall/Winter capsule"></div>
+    <div class="hero-layer" data-layer="2"><img src="img/shorts.jpg" alt="Utility Shorts in washed grey Japanese cotton twill"></div>
+    <div class="hero-layer" data-layer="3"><img src="img/p23.jpg" alt="UNDS work jacket worn on court"></div>
+    <div class="hero-layer" data-layer="4"><img src="img/tee.jpg" alt="Form Tee in black against a brick wall"></div>
+    <div class="hero-shade">
+      <div class="hero-word" id="hero-word">unds</div>
+      <div class="hero-tag" id="hero-tag">Elevated Street Heritage — Los Angeles</div>
     </div>
-    <div class="hero-imgs">
-      <figure><img src="img/p02.jpg" alt="Single V Crewneck in Dirty Cream, worn against a brick wall" data-full="img/p02.jpg"></figure>
-      <figure><img src="img/p01.jpg" alt="Form Tee and Utility Shorts from the Fall/Winter capsule" data-full="img/p01.jpg"></figure>
-      <figure><img src="img/p23.jpg" alt="UNDS work jacket worn on court" data-full="img/p23.jpg"></figure>
+    <div class="hero-beat" data-beat="0">
+      <span class="b1">Fall / Winter Capsule</span>
+      <span class="b2">Four Pieces — Premade &amp; Ready to Ship</span>
     </div>
+    <div class="hero-beat" data-beat="1">
+      <span class="b1">Saturday, Nov 7 — 11AM PST</span>
+      <span class="b2">When It's Gone, It's Gone</span>
+    </div>
+    <div class="hero-hint" id="hero-hint">Scroll</div>
+    <div class="hero-progress" id="hero-progress"></div>
   </div>
-  <div class="dropbar">
-    <div class="wrap dropbar-in">
-      <div>
-        <div class="label">Next Drop — Fall/Winter Capsule</div>
-        <div class="drop-title">Saturday, Nov 7<br><em>11:00 AM PST</em></div>
-      </div>
-      <div class="count" id="count" aria-label="Countdown to the drop">
-        <div><b id="cd-d">–</b><span>Days</span></div>
-        <div><b id="cd-h">–</b><span>Hours</span></div>
-        <div><b id="cd-m">–</b><span>Min</span></div>
-        <div><b id="cd-s">–</b><span>Sec</span></div>
-      </div>
-      <div class="access">
-        <p>Early access goes out before the drop. Leave your email — submitting opens your mail app to confirm. No account, no spam.</p>
-        <form id="access-form">
-          <input type="email" id="access-email" placeholder="your@email.com" required aria-label="Email for early access">
-          <button type="submit">Early Access</button>
-        </form>
-      </div>
+</div>
+
+<div class="dropbar">
+  <div class="wrap dropbar-in">
+    <div>
+      <div class="label">Next Drop — Fall/Winter Capsule</div>
+      <div class="drop-title">Saturday, Nov 7<br><em>11:00 AM PST</em></div>
+    </div>
+    <div class="count" aria-label="Countdown to the drop">
+      <div><b id="cd-d">–</b><span>Days</span></div>
+      <div><b id="cd-h">–</b><span>Hours</span></div>
+      <div><b id="cd-m">–</b><span>Min</span></div>
+      <div><b id="cd-s">–</b><span>Sec</span></div>
+    </div>
+    <div class="access">
+      <p>Early access goes out before the drop. Leave your email — submitting opens your mail app to confirm. No account, no spam.</p>
+      <form id="access-form">
+        <input type="email" id="access-email" placeholder="your@email.com" required aria-label="Email for early access">
+        <button type="submit">Early Access</button>
+      </form>
     </div>
   </div>
 </div>
@@ -184,61 +274,30 @@ footer{background:var(--ink);color:var(--bg);padding:56px 0 34px}
   <div class="wrap">
     <div class="sec-head reveal">
       <h2>The Capsule</h2>
-      <span class="label">4 Pieces — Sat Nov 7 — 11AM PST</span>
+      <span class="hint-note">Pick a piece — hover the photo to inspect the fabric — tap a size, add it to your drop list. Arrow keys switch pieces.</span>
     </div>
-    <div class="capsule">
-      <article class="card reveal">
-        <figure><img src="img/shorts.jpg" alt="Utility Shorts in washed grey Japanese cotton twill" data-full="img/shorts.jpg"></figure>
-        <div class="card-body">
-          <div class="card-top"><h3>Utility Shorts</h3><span class="price">$265</span></div>
-          <p>Heavyweight Japanese cotton twill, treated through a specialized process for an authentic vintage character — no potassium. Every pair fades differently. No two are exactly alike.</p>
-          <div class="specs">
-            <div><span>Fabric</span><span>Heavyweight Japanese cotton twill</span></div>
-            <div><span>Cut</span><span>Low waist, 3/4 length, double-layer knee panels</span></div>
-            <div><span>Sizes</span><span>30 – 40</span></div>
-            <div><span>Stock</span><span>Premade, ready to ship</span></div>
-          </div>
+    <div class="stage reveal">
+      <div class="stage-media" id="stage-media">
+        <img id="stage-img-a" src="img/shorts.jpg" alt="Capsule piece photo">
+        <img id="stage-img-b" src="img/shorts.jpg" alt="" aria-hidden="true">
+        <div id="loupe"></div>
+        <span class="stage-zoom-tag">Hover to inspect</span>
+      </div>
+      <div class="stage-side">
+        <div class="tabs" id="piece-tabs" role="tablist" aria-label="Capsule pieces"></div>
+        <div>
+          <h3 id="piece-name">Utility Shorts</h3>
+          <div class="stage-price" id="piece-price">$265</div>
         </div>
-      </article>
-      <article class="card reveal">
-        <figure><img src="img/p02.jpg" alt="Single V Crewneck in Dirty Cream" data-full="img/p02.jpg"></figure>
-        <div class="card-body">
-          <div class="card-top"><h3>Single V Crewneck</h3><span class="price">$200</span></div>
-          <p>Inspired by 1940s single-V crewnecks — true to the feel and finishing of authentic vintage pieces, with a refined modern fit. 100% brushed French terry, milled and made in the USA.</p>
-          <div class="specs">
-            <div><span>Fabric</span><span>Brushed French terry, 100% cotton</span></div>
-            <div><span>Color</span><span>Dirty Cream</span></div>
-            <div><span>Origin</span><span>Milled &amp; manufactured in the USA</span></div>
-            <div><span>Stock</span><span>Premade, ready to ship</span></div>
-          </div>
+        <p id="piece-desc"></p>
+        <div class="specs" id="piece-specs"></div>
+        <div>
+          <div class="label" style="margin-bottom:9px">Size</div>
+          <div class="size-row" id="size-row"></div>
         </div>
-      </article>
-      <article class="card reveal">
-        <figure><img src="img/tee.jpg" alt="Form Tee in black, worn against a brick wall" data-full="img/tee.jpg"></figure>
-        <div class="card-body">
-          <div class="card-top"><h3>Form Tee</h3><span class="price">$60</span></div>
-          <p>Our newest heavyweight premium black tee, built to bridge formal and everyday. A more structured, refined silhouette than our previous tees — dresses up, wears casual, never feels overly formal.</p>
-          <div class="specs">
-            <div><span>Fabric</span><span>Heavyweight premium cotton</span></div>
-            <div><span>Cut</span><span>Structured, refined fit</span></div>
-            <div><span>Sizes</span><span>S – XL</span></div>
-            <div><span>Stock</span><span>Premade, ready to ship</span></div>
-          </div>
-        </div>
-      </article>
-      <article class="card reveal">
-        <figure><img src="img/p04.jpg" alt="The Single V Crewneck in Dirty Cream, which the fourth piece pairs with" data-full="img/p04.jpg"></figure>
-        <div class="card-body">
-          <span class="tag">Full Reveal This Week</span>
-          <div class="card-top"><h3>The Fourth Piece</h3></div>
-          <p>Matching bottoms for the Single V Crewneck complete the capsule. Full details and pricing post to <a href="https://www.instagram.com/undsonline" target="_blank" rel="noopener">@undsonline</a> this week — early access hears first.</p>
-          <div class="specs">
-            <div><span>Pairs With</span><span>Single V Crewneck — Dirty Cream</span></div>
-            <div><span>Drop</span><span>Saturday, Nov 7 — 11AM PST</span></div>
-            <div><span>Stock</span><span>Premade, ready to ship</span></div>
-          </div>
-        </div>
-      </article>
+        <button class="add-btn" id="add-btn" type="button">Add to Drop List</button>
+        <div class="stage-count" id="stage-count">Piece 1 / 4 — Sat Nov 7, 11AM PST</div>
+      </div>
     </div>
   </div>
 </section>
@@ -247,39 +306,55 @@ footer{background:var(--ink);color:var(--bg);padding:56px 0 34px}
   <div class="wrap">
     <div class="sec-head reveal">
       <h2>Archive</h2>
-      <span class="label">Past Drops — Gone When They're Gone</span>
+      <div style="display:flex;align-items:center;gap:18px">
+        <span class="hint-note">Drag to browse</span>
+        <div class="rail-nav">
+          <button type="button" id="rail-prev" aria-label="Scroll archive back">←</button>
+          <button type="button" id="rail-next" aria-label="Scroll archive forward">→</button>
+        </div>
+      </div>
     </div>
-    <div class="archive">
-      <article class="acard reveal">
-        <figure><img src="img/bb-denim.jpg" alt="Black Badge 21 oz denim, washed black" data-full="img/bb-denim.jpg"></figure>
+  </div>
+  <div class="wrap rail-wrap">
+    <div class="rail reveal" id="archive-rail">
+      <article class="acard">
+        <figure><img src="img/bb-denim.jpg" alt="Black Badge 21 oz denim, washed black"></figure>
         <div class="acard-body">
           <div class="row"><span class="status">Black Badge</span><span class="price">$500 – $600</span></div>
           <h3>Black Badge Denim — 21 oz Selvedge</h3>
           <p>The highest level of UNDS denim. Heavyweight 21 oz Japanese selvedge in the signature relaxed cut — Indigo with gold trims at $500, and the washed edition at $600, washed to read like a true one-of-one vintage pair. The washed edition previewed at the NYFW pop-up and sold out there. Sizes 30–40.</p>
         </div>
       </article>
-      <article class="acard reveal">
-        <figure><img src="img/p25.jpg" alt="Light Wash Double Knee Capris denim" data-full="img/p25.jpg"></figure>
+      <article class="acard">
+        <figure><img src="img/p25.jpg" alt="Light Wash Double Knee Capris denim"></figure>
         <div class="acard-body">
           <div class="row"><span class="status">Denim</span></div>
           <h3>Double Knee Capris — Light Wash</h3>
           <p>Our most sought-after silhouette, returned in a new form. Anybody can cut up a pair of vintage carpenters — these were built properly, from the ground up. Vintage-inspired wash, modern construction.</p>
         </div>
       </article>
-      <article class="acard reveal">
-        <figure><img src="img/p06.jpg" alt="The Lenley leather henley in charcoal" data-full="img/p06.jpg"></figure>
+      <article class="acard">
+        <figure><img src="img/p06.jpg" alt="The Lenley leather henley in charcoal"></figure>
         <div class="acard-body">
           <div class="row"><span class="status">Henley</span><span class="price">$250</span></div>
           <h3>The Lenley</h3>
           <p>The traditional henley, rebuilt with leather. Premium waffle knit milled in Los Angeles, finished with imported Italian lambskin for the snap enclosure. Black on Black and White on Black.</p>
         </div>
       </article>
-      <article class="acard reveal">
-        <figure><img src="img/p13.jpg" alt="V3 Bagged Tees in washed colorways" data-full="img/p13.jpg"></figure>
+      <article class="acard">
+        <figure><img src="img/p13.jpg" alt="V3 Bagged Tees in washed colorways"></figure>
         <div class="acard-body">
           <div class="row"><span class="status">Tees</span><span class="price">$135</span></div>
           <h3>V3 Bagged Tee</h3>
           <p>Our V3 fit — closer to the body, longer vintage silhouette, individually faded and distressed. Charcoal, Wine Red, Mocha Brown, Forest Green. Tier pricing ran to all four for $400.</p>
+        </div>
+      </article>
+      <article class="acard">
+        <figure><img src="img/p10.jpg" alt="Chopped longsleeves in washed colorways"></figure>
+        <div class="acard-body">
+          <div class="row"><span class="status">Longsleeves</span><span class="price">$155</span></div>
+          <h3>Chopped Longsleeve</h3>
+          <p>Three washed colorways — Charcoal, Faded Black, Wine Red. Premade and ready to ship when it dropped; gone now.</p>
         </div>
       </article>
     </div>
@@ -288,17 +363,21 @@ footer{background:var(--ink);color:var(--bg);padding:56px 0 34px}
 
 <section id="fits" class="fits">
   <div class="wrap fits-grid">
-    <div class="fits-imgs reveal">
-      <img src="img/p10.jpg" alt="Chopped longsleeves in washed colorways" data-full="img/p10.jpg">
-      <img src="img/p23.jpg" alt="UNDS worn on court" data-full="img/p23.jpg">
-      <img src="img/p25.jpg" alt="Light wash double knee denim" data-full="img/p25.jpg">
-      <img src="img/p01.jpg" alt="Form Tee and Utility Shorts fit" data-full="img/p01.jpg">
+    <div class="fit-picker reveal" id="fit-picker">
+      <button class="fit-thumb on" type="button" data-fit="0"><img src="img/p23.jpg" alt="Fit worn on court"><span>On Court</span></button>
+      <button class="fit-thumb" type="button" data-fit="1"><img src="img/p01.jpg" alt="Form Tee and Utility Shorts fit"><span>Capsule Fit</span></button>
+      <button class="fit-thumb" type="button" data-fit="2"><img src="img/p10.jpg" alt="Chopped longsleeves fit"><span>Longsleeves</span></button>
+      <button class="fit-thumb" type="button" data-fit="3"><img src="img/p25.jpg" alt="Double knee denim fit"><span>Double Knees</span></button>
     </div>
     <div class="reveal">
       <span class="label" style="color:var(--accent)">Community</span>
       <h2>Fits &amp; The Drop Giveaway</h2>
-      <p>UNDS is worn, not just sold. Fit Pic Friday runs every month — post your fit, the community votes, and the winner gets store credit toward the next drop. Fits of the Week keeps the best ones in rotation.</p>
-      <p>For the Nov 7 capsule, one winner takes a pair of Utility Shorts and one takes a Form Tee. One of each item in the capsule is being given away.</p>
+      <p>UNDS is worn, not just sold. Fit Pic Friday runs every month — post your fit, the community votes, and the winner gets store credit toward the next drop. Tap a fit to break down what's in it.</p>
+      <div id="fit-detail">
+        <h3 id="fit-title">On Court — the #1 Draft Pick's Fit</h3>
+        <ul id="fit-list"></ul>
+      </div>
+      <p style="margin-top:20px">For the Nov 7 capsule, one winner takes a pair of Utility Shorts and one takes a Form Tee. One of each item in the capsule is being given away.</p>
       <div class="steps">
         <div><b>01</b><span>Like the drop post on <a href="https://www.instagram.com/undsonline" target="_blank" rel="noopener">@undsonline</a></span></div>
         <div><b>02</b><span>Comment your size and the item you want</span></div>
@@ -341,40 +420,281 @@ footer{background:var(--ink);color:var(--bg);padding:56px 0 34px}
   </div>
 </footer>
 
+<div id="scrim"></div>
+<aside id="drawer" aria-label="Your drop list">
+  <header>
+    <h3>Your Drop List</h3>
+    <button id="drawer-close" type="button" aria-label="Close drop list">✕</button>
+  </header>
+  <div id="drawer-items"></div>
+  <div id="drawer-foot">
+    <div id="drawer-total"><span>Total</span><span id="drawer-sum">$0</span></div>
+    <a id="checkout-btn" href="https://www.undsonline.com" target="_blank" rel="noopener">Checkout at undsonline.com — Sat 11AM PST</a>
+  </div>
+</aside>
+
 <div id="lightbox" role="dialog" aria-label="Photo viewer"><img id="lightbox-img" src="" alt="UNDS photo, enlarged"></div>
 <script>
 (function(){
-  // Countdown to Saturday, Nov 7 2026, 11:00 AM PST
-  var target = new Date("2026-11-07T11:00:00-08:00").getTime();
-  var dEl=document.getElementById("cd-d"),hEl=document.getElementById("cd-h"),
-      mEl=document.getElementById("cd-m"),sEl=document.getElementById("cd-s");
-  function pad(n){return (n<10?"0":"")+n}
-  function tick(){
-    var diff = target - Date.now();
-    if(diff<=0){ dEl.textContent="0";hEl.textContent="00";mEl.textContent="00";sEl.textContent="00";
-      var t=document.querySelector(".drop-title"); if(t) t.innerHTML="The Drop Is <em>Live</em>"; return; }
-    var d=Math.floor(diff/864e5), h=Math.floor(diff/36e5)%24, m=Math.floor(diff/6e4)%60, s=Math.floor(diff/1e3)%60;
-    dEl.textContent=d; hEl.textContent=pad(h); mEl.textContent=pad(m); sEl.textContent=pad(s);
-    setTimeout(tick,1000);
+"use strict";
+var reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+var finePointer = window.matchMedia("(pointer: fine)").matches;
+
+/* ---------- countdown ---------- */
+var target = new Date("2026-11-07T11:00:00-08:00").getTime();
+var cdD=document.getElementById("cd-d"),cdH=document.getElementById("cd-h"),cdM=document.getElementById("cd-m"),cdS=document.getElementById("cd-s");
+function pad(n){return (n<10?"0":"")+n}
+function tick(){
+  var diff = target - Date.now();
+  if(diff<=0){ cdD.textContent="0";cdH.textContent="00";cdM.textContent="00";cdS.textContent="00";
+    var t=document.querySelector(".drop-title"); if(t) t.innerHTML="The Drop Is <em>Live</em>"; return; }
+  cdD.textContent=Math.floor(diff/864e5);
+  cdH.textContent=pad(Math.floor(diff/36e5)%24);
+  cdM.textContent=pad(Math.floor(diff/6e4)%60);
+  cdS.textContent=pad(Math.floor(diff/1e3)%60);
+  setTimeout(tick,1000);
+}
+tick();
+
+/* ---------- early access (no backend: composes an email) ---------- */
+document.getElementById("access-form").addEventListener("submit",function(e){
+  e.preventDefault();
+  var em=document.getElementById("access-email").value.trim();
+  var body=encodeURIComponent("Please add me to early access for the Saturday, Nov 7 drop.\n\nMy email: "+em);
+  window.location.href="mailto:Support@undsonline.com?subject="+encodeURIComponent("Early Access — Nov 7 Drop")+"&body="+body;
+});
+
+/* ---------- custom cursor ---------- */
+if(finePointer && !reduced){
+  var dot=document.getElementById("cursor-dot"), ring=document.getElementById("cursor-ring");
+  var mx=innerWidth/2,my=innerHeight/2,rx=mx,ry=my;
+  addEventListener("mousemove",function(e){ mx=e.clientX; my=e.clientY; dot.style.left=mx+"px"; dot.style.top=my+"px"; });
+  (function loop(){ rx+=(mx-rx)*0.16; ry+=(my-ry)*0.16; ring.style.left=rx+"px"; ring.style.top=ry+"px"; requestAnimationFrame(loop); })();
+  document.querySelectorAll("a,button,.tab,.size-chip,.fit-thumb,.acard").forEach(function(el){
+    el.addEventListener("mouseenter",function(){ ring.classList.add("grow"); });
+    el.addEventListener("mouseleave",function(){ ring.classList.remove("grow"); });
+  });
+}
+
+/* ---------- scroll hero ---------- */
+var pin=document.getElementById("hero-pin");
+var layers=Array.prototype.slice.call(document.querySelectorAll(".hero-layer"));
+var word=document.getElementById("hero-word"), tag=document.getElementById("hero-tag");
+var beats=Array.prototype.slice.call(document.querySelectorAll(".hero-beat"));
+var hint=document.getElementById("hero-hint"), prog=document.getElementById("hero-progress");
+function clamp01(v){return v<0?0:v>1?1:v}
+function seg(p,a,b){ return clamp01((p-a)/(b-a)); }
+function renderHero(){
+  var r=pin.getBoundingClientRect();
+  var total=pin.offsetHeight - innerHeight;
+  var p = total>0 ? clamp01(-r.top/total) : 0;
+  var n=layers.length, pos=p*(n-1);
+  layers.forEach(function(L,i){
+    var d=Math.abs(pos-i);
+    var o=clamp01(1-d);
+    L.style.opacity=o.toFixed(3);
+    var s=1 + 0.10*(1-clamp01(d)) + 0.05*p;
+    L.style.transform="scale("+s.toFixed(4)+")";
+  });
+  var wOut=seg(p,0.30,0.52);
+  word.style.opacity=(1-wOut).toFixed(3);
+  word.style.transform="scale("+(1-0.42*seg(p,0,0.55)).toFixed(4)+") translateY("+(-30*seg(p,0,0.55)).toFixed(1)+"px)";
+  tag.style.opacity=(1-seg(p,0.16,0.34)).toFixed(3);
+  hint.style.opacity=(1-seg(p,0.02,0.10)).toFixed(3);
+  beats[0].style.opacity=(seg(p,0.36,0.44)*(1-seg(p,0.56,0.64))).toFixed(3);
+  beats[0].style.transform="translateY("+((1-seg(p,0.36,0.44))*18).toFixed(1)+"px)";
+  beats[1].style.opacity=(seg(p,0.66,0.74)*(1-seg(p,0.94,1.0))).toFixed(3);
+  beats[1].style.transform="translateY("+((1-seg(p,0.66,0.74))*18).toFixed(1)+"px)";
+  prog.style.width=(p*100).toFixed(2)+"%";
+}
+if(reduced){
+  layers.forEach(function(L,i){ L.style.opacity = i===0 ? "1":"0"; });
+  beats.forEach(function(b){ b.style.opacity="0"; });
+}else{
+  var heroQueued=false;
+  addEventListener("scroll",function(){
+    if(heroQueued) return; heroQueued=true;
+    requestAnimationFrame(function(){ renderHero(); heroQueued=false; });
+  },{passive:true});
+  renderHero();
+}
+
+/* ---------- capsule stage ---------- */
+var PIECES=[
+ { key:"utility", name:"Utility Shorts", price:265, img:"img/shorts.jpg",
+   desc:"Heavyweight Japanese cotton twill, treated through a specialized process for an authentic vintage character — no potassium. Every pair fades differently. No two are exactly alike.",
+   specs:[["Fabric","Heavyweight Japanese cotton twill"],["Cut","Low waist, 3/4 length, double-layer knee panels"],["Sizes","30 – 40"],["Stock","Premade, ready to ship"]],
+   sizes:["30","32","34","36","38","40"], addable:true },
+ { key:"crewneck", name:"Single V Crewneck", price:200, img:"img/p02.jpg",
+   desc:"Inspired by 1940s single-V crewnecks — true to the feel and finishing of authentic vintage pieces, with a refined modern fit. 100% brushed French terry, milled and made in the USA.",
+   specs:[["Fabric","Brushed French terry, 100% cotton"],["Color","Dirty Cream"],["Origin","Milled & manufactured in the USA"],["Stock","Premade, ready to ship"]],
+   sizes:null, sizeNote:"Size run announced at the drop — early access hears first.", addable:true },
+ { key:"tee", name:"Form Tee", price:60, img:"img/tee.jpg",
+   desc:"Our newest heavyweight premium black tee, built to bridge formal and everyday. A more structured, refined silhouette than our previous tees — dresses up, wears casual, never feels overly formal.",
+   specs:[["Fabric","Heavyweight premium cotton"],["Cut","Structured, refined fit"],["Sizes","S – XL"],["Stock","Premade, ready to ship"]],
+   sizes:["S","M","L","XL"], addable:true },
+ { key:"fourth", name:"The Fourth Piece", price:null, img:"img/p04.jpg",
+   desc:"Matching bottoms for the Single V Crewneck complete the capsule. Full details and pricing post to @undsonline this week — early access hears first.",
+   specs:[["Pairs With","Single V Crewneck — Dirty Cream"],["Drop","Saturday, Nov 7 — 11AM PST"],["Stock","Premade, ready to ship"]],
+   sizes:null, sizeNote:"Revealed this week on @undsonline.", addable:false }
+];
+var tabsEl=document.getElementById("piece-tabs");
+var imgA=document.getElementById("stage-img-a"), imgB=document.getElementById("stage-img-b");
+var frontIsA=true, current=0, currentSize=null;
+var nameEl=document.getElementById("piece-name"), priceEl=document.getElementById("piece-price"),
+    descEl=document.getElementById("piece-desc"), specsEl=document.getElementById("piece-specs"),
+    sizeRow=document.getElementById("size-row"), addBtn=document.getElementById("add-btn"),
+    stageCount=document.getElementById("stage-count"), media=document.getElementById("stage-media"),
+    loupe=document.getElementById("loupe");
+PIECES.forEach(function(pc,i){
+  var b=document.createElement("button");
+  b.type="button"; b.className="tab"+(i===0?" on":""); b.textContent=pc.name; b.setAttribute("role","tab");
+  b.addEventListener("click",function(){ setPiece(i); });
+  tabsEl.appendChild(b);
+});
+function setPiece(i){
+  current=i; currentSize=null;
+  var pc=PIECES[i];
+  tabsEl.querySelectorAll(".tab").forEach(function(t,j){ t.classList.toggle("on", j===i); });
+  var front=frontIsA?imgA:imgB, back=frontIsA?imgB:imgA;
+  back.src=pc.img; back.style.opacity="1"; front.style.opacity="0";
+  frontIsA=!frontIsA;
+  loupe.style.backgroundImage='url("'+pc.img+'")';
+  nameEl.textContent=pc.name;
+  priceEl.textContent = pc.price ? "$"+pc.price : "Revealed this week";
+  descEl.textContent=pc.desc;
+  specsEl.innerHTML=pc.specs.map(function(s){ return "<div><span>"+s[0]+"</span><span>"+s[1]+"</span></div>"; }).join("");
+  sizeRow.innerHTML="";
+  if(pc.sizes){
+    pc.sizes.forEach(function(sz){
+      var c=document.createElement("button");
+      c.type="button"; c.className="size-chip"; c.textContent=sz;
+      c.addEventListener("click",function(){
+        currentSize=sz;
+        sizeRow.querySelectorAll(".size-chip").forEach(function(x){ x.classList.toggle("on", x===c); });
+      });
+      sizeRow.appendChild(c);
+    });
+  }else{
+    var note=document.createElement("span"); note.className="size-note"; note.textContent=pc.sizeNote||"";
+    sizeRow.appendChild(note);
   }
-  tick();
-  // Early access: no backend — the form composes an email to the brand's support inbox.
-  document.getElementById("access-form").addEventListener("submit",function(e){
-    e.preventDefault();
-    var em=document.getElementById("access-email").value.trim();
-    var body=encodeURIComponent("Please add me to early access for the Saturday, Nov 7 drop.\n\nMy email: "+em);
-    window.location.href="mailto:Support@undsonline.com?subject="+encodeURIComponent("Early Access — Nov 7 Drop")+"&body="+body;
+  addBtn.disabled=!pc.addable;
+  addBtn.textContent= pc.addable ? "Add to Drop List" : "Not Yet — Reveal This Week";
+  addBtn.classList.remove("added");
+  stageCount.textContent="Piece "+(i+1)+" / "+PIECES.length+" — Sat Nov 7, 11AM PST";
+}
+addBtn.addEventListener("click",function(){
+  var pc=PIECES[current];
+  if(!pc.addable) return;
+  if(pc.sizes && !currentSize){
+    sizeRow.querySelectorAll(".size-chip").forEach(function(c){ c.style.borderColor="var(--accent)"; });
+    setTimeout(function(){ sizeRow.querySelectorAll(".size-chip").forEach(function(c){ c.style.borderColor=""; }); },1200);
+    return;
+  }
+  addToList(pc, currentSize);
+  addBtn.textContent="Added to Drop List"; addBtn.classList.add("added");
+  setTimeout(function(){ addBtn.textContent="Add to Drop List"; addBtn.classList.remove("added"); },1300);
+});
+document.addEventListener("keydown",function(e){
+  if(e.key==="ArrowRight") setPiece((current+1)%PIECES.length);
+  if(e.key==="ArrowLeft") setPiece((current+PIECES.length-1)%PIECES.length);
+});
+/* loupe */
+if(finePointer && !reduced){
+  media.addEventListener("mousemove",function(e){
+    var r=media.getBoundingClientRect();
+    var x=e.clientX-r.left, y=e.clientY-r.top;
+    loupe.style.display="block";
+    loupe.style.left=(x-95)+"px"; loupe.style.top=(y-95)+"px";
+    var zoom=2.2;
+    loupe.style.backgroundSize=(r.width*zoom)+"px "+(r.height*zoom)+"px";
+    loupe.style.backgroundPosition=(-(x*zoom-95))+"px "+(-(y*zoom-95))+"px";
   });
-  // Scroll reveal (opacity/translate only)
-  var io=new IntersectionObserver(function(es){es.forEach(function(en){if(en.isIntersecting){en.target.classList.add("in");io.unobserve(en.target)}})},{threshold:.12});
-  document.querySelectorAll(".reveal").forEach(function(el){io.observe(el)});
-  // Lightbox
-  var lb=document.getElementById("lightbox"), lbImg=document.getElementById("lightbox-img");
-  document.querySelectorAll("img[data-full]").forEach(function(img){
-    img.addEventListener("click",function(){ lbImg.src=img.getAttribute("data-full"); lb.classList.add("open"); });
+  media.addEventListener("mouseleave",function(){ loupe.style.display="none"; });
+}
+setPiece(0);
+
+/* ---------- drop list drawer ---------- */
+var list=[], drawer=document.getElementById("drawer"), scrim=document.getElementById("scrim"),
+    itemsEl=document.getElementById("drawer-items"), sumEl=document.getElementById("drawer-sum"),
+    countEl=document.getElementById("droplist-count");
+function renderList(){
+  countEl.textContent=list.length;
+  if(!list.length){
+    itemsEl.innerHTML='<p id="drawer-empty">Nothing here yet. The capsule drops Saturday, Nov 7 at 11AM PST — build your list now, check out the second it opens.</p>';
+  }else{
+    itemsEl.innerHTML=list.map(function(it,i){
+      return '<div class="ditem"><img src="'+it.img+'" alt=""><div><div class="dn">'+it.name+'</div><div class="ds">'+(it.size?("Size "+it.size):"Size at drop")+'</div><div class="dp">$'+it.price+'</div></div><button type="button" data-rm="'+i+'">Remove</button></div>';
+    }).join("");
+    itemsEl.querySelectorAll("[data-rm]").forEach(function(b){
+      b.addEventListener("click",function(){ list.splice(+b.getAttribute("data-rm"),1); renderList(); });
+    });
+  }
+  sumEl.textContent="$"+list.reduce(function(a,it){ return a+it.price; },0);
+}
+function addToList(pc,size){
+  list.push({name:pc.name, size:size, price:pc.price||0, img:pc.img});
+  renderList();
+}
+function openDrawer(o){ drawer.classList.toggle("open",o); scrim.classList.toggle("on",o); }
+document.getElementById("droplist-btn").addEventListener("click",function(){ openDrawer(true); });
+document.getElementById("drawer-close").addEventListener("click",function(){ openDrawer(false); });
+scrim.addEventListener("click",function(){ openDrawer(false); });
+renderList();
+
+/* ---------- archive rail drag ---------- */
+var rail=document.getElementById("archive-rail");
+var dragging=false, startX=0, startScroll=0, moved=false;
+rail.addEventListener("pointerdown",function(e){
+  dragging=true; moved=false; startX=e.clientX; startScroll=rail.scrollLeft;
+  rail.classList.add("dragging");
+});
+addEventListener("pointermove",function(e){
+  if(!dragging) return;
+  var dx=e.clientX-startX;
+  if(Math.abs(dx)>4) moved=true;
+  rail.scrollLeft=startScroll-dx;
+});
+addEventListener("pointerup",function(){ dragging=false; rail.classList.remove("dragging"); });
+document.getElementById("rail-prev").addEventListener("click",function(){ rail.scrollBy({left:-360,behavior:"smooth"}); });
+document.getElementById("rail-next").addEventListener("click",function(){ rail.scrollBy({left:360,behavior:"smooth"}); });
+
+/* ---------- fits explorer ---------- */
+var FITS=[
+ { title:"On Court — AJ Dybantsa's UNDS Fit",
+   rows:[["Player","AJ Dybantsa — #1 NBA draft pick"],["Shorts","Oatmeal Grey Sweatshorts"],["Bottoms","Selvedge Jet Black Doubleknees"],["Status","Restock announced on the post"]] },
+ { title:"Capsule Fit — Saturday's Drop",
+   rows:[["Top","Form Tee — $60"],["Bottom","Utility Shorts — $265"],["Drop","Saturday, Nov 7 — 11AM PST"],["Stock","Premade, ready to ship"]] },
+ { title:"Chopped Longsleeves — Sept 19 Drop",
+   rows:[["Piece","Chopped Longsleeve — $155"],["Colorways","Charcoal / Faded Black / Wine Red"],["Stock","Premade when it dropped"]] },
+ { title:"Double Knees — Built From Scratch",
+   rows:[["Piece","Double Knee Capris — Light Wash"],["Build","Built from the ground up — not cut-up vintage"],["Wash","Vintage-inspired, modern construction"],["Stock","Limited quantities"]] }
+];
+var fitTitle=document.getElementById("fit-title"), fitList=document.getElementById("fit-list");
+function setFit(i){
+  document.querySelectorAll(".fit-thumb").forEach(function(t,j){ t.classList.toggle("on", j===i); });
+  fitTitle.textContent=FITS[i].title;
+  fitList.innerHTML=FITS[i].rows.map(function(r){ return "<li><span>"+r[0]+"</span><span>"+r[1]+"</span></li>"; }).join("");
+}
+document.querySelectorAll(".fit-thumb").forEach(function(t){
+  t.addEventListener("click",function(){ setFit(+t.getAttribute("data-fit")); });
+});
+setFit(0);
+
+/* ---------- reveals ---------- */
+var io=new IntersectionObserver(function(es){ es.forEach(function(en){ if(en.isIntersecting){ en.target.classList.add("in"); io.unobserve(en.target); } }); },{threshold:.1});
+document.querySelectorAll(".reveal").forEach(function(el){ io.observe(el); });
+
+/* ---------- lightbox (touch: tap stage photo) ---------- */
+var lb=document.getElementById("lightbox"), lbImg=document.getElementById("lightbox-img");
+if(!finePointer){
+  media.addEventListener("click",function(){
+    lbImg.src=PIECES[current].img; lb.classList.add("open");
   });
-  lb.addEventListener("click",function(){ lb.classList.remove("open"); lbImg.src=""; });
-  document.addEventListener("keydown",function(e){ if(e.key==="Escape"){ lb.classList.remove("open"); lbImg.src=""; }});
+}
+lb.addEventListener("click",function(){ lb.classList.remove("open"); lbImg.src=""; });
+document.addEventListener("keydown",function(e){ if(e.key==="Escape"){ lb.classList.remove("open"); lbImg.src=""; openDrawer(false); } });
 })();
 </script>
 </body>
